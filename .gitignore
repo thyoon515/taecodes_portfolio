@@ -1,0 +1,20 @@
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.vite/
+
+# Rails / backend
+backend/log/
+backend/tmp/
+backend/node_modules/
+backend/.env
+backend/.bundle/
+backend/vendor/bundle
+backend/.env
+
+# Common
+.DS_Store
+.vscode/
+.env.local
+.idea/
