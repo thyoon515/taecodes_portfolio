@@ -10,10 +10,15 @@ export default function About() {
     { id: 'react', label: 'React', icon: '⚛️' },
     { id: 'ruby', label: 'Ruby', icon: '💎' },
     { id: 'rails', label: 'Rails', icon: '🚉' },
-    { id: 'express', label: 'Express', icon: '🖤' },
+    { id: 'llm', label: 'LLM', icon: '🖤' },
     { id: 'git', label: 'Git', icon: '🔧' },
     { id: 'docker', label: 'Docker', icon: '🐳' },
-    { id: 'postman', label: 'Postman', icon: '📮' }
+    { id: 'zapier', label: 'Zapier', icon: '⚡' },
+    { id: 'postman', label: 'Postman', icon: '📮' },
+    { id: 'rag', label: 'RAG', icon: '🧩' },
+    { id: 'vite', label: 'Vite', icon: '⚡' },
+    { id: 'html', label: 'HTML', icon: '🌐' },
+    { id: 'figma', label: 'Figma', icon: '🎨' }
   ];
 
   // Duplicate the array so the marquee can loop seamlessly
@@ -27,15 +32,17 @@ export default function About() {
         backgroundColor: 'background.default',
         color: 'text.primary',
         textAlign: 'center',
+        borderBottom: (theme) =>
+          theme.palette.mode === 'light' ? '1px solid rgba(15, 23, 42, 0.12)' : 'none',
       }}
     >
       <Box maxWidth="md" mx="auto" px={3}>
         <Typography variant="h4" fontWeight="bold" gutterBottom>
-          Who's Tae?
+          Current Skill Set & Actively Developing Capabilities
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 6, lineHeight: 1.7 }}>
-          I’m a software engineer passionate about building intuitive web experiences. I specialize in React, Node.js, and Ruby on Rails, and enjoy creating efficient, scalable full-stack applications.
+          I work across the full stack using React, Node.js, and Ruby on Rails, with hands-on experience in production front-end systems, CMS-driven workflows, and AI-assisted automation. Alongside my core stack, I’m actively developing applied AI skills including RAG pipelines, prompt engineering, fine-tuning, and vector databases to build more intelligent, scalable systems.
         </Typography>
 
         {/* Marquee-style Tech Stack (no scrollbar) */}
@@ -79,6 +86,8 @@ export default function About() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   transition: 'transform 0.2s',
+                  boxShadow: (theme) => (theme.palette.mode === 'light' ? 'none' : theme.shadows[3]),
+                  border: (theme) => (theme.palette.mode === 'light' ? '1px solid rgba(15, 23, 42, 0.08)' : 'none'),
                 }}
               >
                 <Typography variant="h4" sx={{ mb: 1 }}>

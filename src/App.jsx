@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -9,6 +9,7 @@ import Footer from "./components/Footer.jsx";
 import AppBar from "./components/Appbar.jsx";
 import HeroBanner from "./components/Hero.jsx";
 import About from "./components/About.jsx";
+import Experience from "./components/Experience.jsx";
 
 import ReactLogo from "./assets/react.svg?react";
 import viteLogo from "/vite.svg";
@@ -60,6 +61,31 @@ function App() {
     fetchIpAddress();
   }, []);
 
+  const useInView = (options = {}) => {
+    const ref = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+      if (!ref.current) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        { threshold: 0.2, ...options }
+      );
+      observer.observe(ref.current);
+      return () => observer.disconnect();
+    }, [options]);
+
+    return [ref, isVisible];
+  };
+
+  const [heroRef, heroVisible] = useInView({ rootMargin: "0px 0px -10% 0px" });
+  const [aboutRef, aboutVisible] = useInView({ rootMargin: "0px 0px -10% 0px" });
+  const [experienceRef, experienceVisible] = useInView({ rootMargin: "0px 0px -10% 0px" });
+  const [logosRef, logosVisible] = useInView({ rootMargin: "0px 0px -10% 0px" });
+  const [footerRef, footerVisible] = useInView({ rootMargin: "0px 0px -10% 0px" });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -68,34 +94,41 @@ function App() {
 
       <Container maxWidth={false} sx={{ px: 2, pt: 10 }}>
         <Header />
-        <HeroBanner />
-        <About />
-        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-          <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <ReactLogo className="logo react" alt="React logo" />
-          </a>
-          <a href="https://taecodes.com" target="_blank" rel="noreferrer">
-            <img src={taecodesLogo} className="logo taecodes" alt="taecodes logo" />
-          </a>
+        <Box ref={heroRef} className={`reveal ${heroVisible ? "is-visible" : ""}`}>
+          <HeroBanner />
         </Box>
+        <Box ref={aboutRef} className={`reveal ${aboutVisible ? "is-visible" : ""}`}>
+          <About />
+        </Box>
+        <Box ref={experienceRef} className={`reveal ${experienceVisible ? "is-visible" : ""}`}>
+          <Experience />
+        </Box>
+        <Box ref={logosRef} className={`reveal ${logosVisible ? "is-visible" : ""}`}>
+          <Box sx={{ display: "flex", gap: 2, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
+            <a href="https://vite.dev" target="_blank" rel="noreferrer">
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            </a>
+            <a href="https://react.dev" target="_blank" rel="noreferrer">
+              <ReactLogo className="logo react" alt="React logo" />
+            </a>
+            <a href="https://taecodes.com" target="_blank" rel="noreferrer">
+              <img src={taecodesLogo} className="logo taecodes" alt="taecodes logo" />
+            </a>
+          </Box>
 
-        <h1>Vite + React</h1>
-        <h2>{greeting}</h2>
-        <h3>Your IP Address: {ipAddress}</h3>
-
-        <div className="card">
+        {/* <div className="card">
           <button onClick={() => setCount((c) => c + 1)}>count is {count}</button>
           <p>
             Edit <code>src/App.jsx</code> and save to test HMR
           </p>
-        </div>
+        </div> */}
 
         <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 
-        <Footer />
+        </Box>
+        <Box ref={footerRef} className={`reveal ${footerVisible ? "is-visible" : ""}`}>
+          <Footer />
+        </Box>
       </Container>
     </ThemeProvider>
   );

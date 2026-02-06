@@ -8,34 +8,29 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import taecodesLogo from "/cd_taecodes_icon_2.png";
 import ThemeToggle from "./ThemeToggle"; // make sure this exists
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-export default function ResponsiveAppBar({ mode = "dark", onToggleTheme = () => {} }) {
+const pages = ["Skills", "Experience"];
+const pageLinks = {
+  Skills: "#about",
+  Experience: "#experience",
+};
+export default function ResponsiveAppBar({
+  mode = "dark",
+  onToggleTheme = () => {},
+}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -99,11 +94,20 @@ export default function ResponsiveAppBar({ mode = "dark", onToggleTheme = () => 
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
-                </MenuItem>
-              ))}
+              {pages.map((page) => {
+                const href = pageLinks[page];
+                return (
+                  <MenuItem
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    component={href ? "a" : "li"}
+                    href={href}
+                    sx={href ? { textDecoration: "none", color: "inherit" } : undefined}
+                  >
+                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  </MenuItem>
+                );
+              })}
             </Menu>
           </Box>
 
@@ -127,45 +131,26 @@ export default function ResponsiveAppBar({ mode = "dark", onToggleTheme = () => 
 
           {/* Desktop nav links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
+            {pages.map((page) => {
+              const href = pageLinks[page];
+              return (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  component={href ? "a" : "button"}
+                  href={href}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              );
+            })}
           </Box>
 
-          {/* Right side: theme toggle + user avatar/menu */}
+          {/* Right side: theme toggle */}
           <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap: 1 }}>
             {/* Theme toggle receives mode and calls onToggleTheme */}
             <ThemeToggle mode={mode} onToggle={onToggleTheme} />
-
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User avatar" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar-user"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>
