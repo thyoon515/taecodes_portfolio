@@ -14,10 +14,12 @@ import AdbIcon from "@mui/icons-material/Adb";
 import taecodesLogo from "/cd_taecodes_icon_2.png";
 import ThemeToggle from "./ThemeToggle"; // make sure this exists
 
-const pages = ["Skills", "Experience"];
+const pages = ["Skills", "Projects", "Experience", "Contact"];
 const pageLinks = {
   Skills: "#about",
+  Projects: "#projects",
   Experience: "#experience",
+  Contact: "#contact",
 };
 export default function ResponsiveAppBar({
   mode = "dark",
@@ -47,7 +49,7 @@ export default function ResponsiveAppBar({
         <Toolbar disableGutters>
           {/* Logo */}
           <a href="https://taecodes.com" target="_blank" rel="noreferrer">
-            <img src={taecodesLogo} className="logo taecodes" alt="taecodes logo" />
+            <img src={taecodesLogo} alt="taecodes logo" style={{ height: "2em", width: "auto" }} />
           </a>
           <Typography
             variant="h6"
@@ -139,7 +141,7 @@ export default function ResponsiveAppBar({
                   onClick={handleCloseNavMenu}
                   component={href ? "a" : "button"}
                   href={href}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{ my: 2, color: "text.primary", display: "block" }}
                 >
                   {page}
                 </Button>
