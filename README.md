@@ -1,16 +1,129 @@
-# React + Vite
+# taecodes — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for Taehoon Yoon. Built with React + Vite on the frontend and Ruby on Rails as the API backend, deployed on Render.
 
-Currently, two official plugins are available:
+🌐 **Live site:** [taecodes.com](https://taecodes.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Tech |
+|---|---|
+| Frontend | React 19, Vite, MUI (Material UI) |
+| Backend | Ruby on Rails (API mode) |
+| Database | PostgreSQL |
+| Containerization | Docker Compose |
+| Deployment | Render |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Running Locally
+
+### Prerequisites
+
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18+)
+- [Ruby](https://www.ruby-lang.org/) (see `backend/.ruby-version`)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Bundler](https://bundler.io/) — `gem install bundler`
+
+Or, if you prefer Docker:
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+---
+
+### Option 1 — Run with Docker (recommended)
+
+```bash
+# Clone the repo
+git clone git@github.com:thyoon515/taecodes_portfolio.git
+cd taecodes_portfolio
+
+# Start all services (frontend, backend, database)
+docker compose up --build
+```
+
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Backend API: [http://localhost:3000](http://localhost:3000)
+
+To stop:
+```bash
+docker compose down
+```
+
+---
+
+### Option 2 — Run manually
+
+#### 1. Clone the repo
+
+```bash
+git clone git@github.com:thyoon515/taecodes_portfolio.git
+cd taecodes_portfolio
+```
+
+#### 2. Frontend
+
+```bash
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+Frontend runs at [http://localhost:5174](http://localhost:5174)
+
+#### 3. Backend
+
+```bash
+cd backend
+
+# Install gems
+bundle install
+
+# Set up the database
+rails db:create db:migrate db:seed
+
+# Start the Rails server
+rails server
+```
+
+Backend runs at [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Available Scripts (Frontend)
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start local dev server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint |
+
+---
+
+## Project Structure
+
+```
+taecodes_portfolio/
+├── src/                  # Frontend source (React)
+│   ├── components/       # Hero, About, Projects, Experience, Contact
+│   ├── App.jsx           # Root component with MUI ThemeProvider
+│   └── main.jsx          # Entry point
+├── backend/              # Ruby on Rails API
+│   ├── app/              # Models, controllers
+│   ├── config/           # Routes, database, deploy config
+│   └── db/               # Migrations, schema, seeds
+├── public/               # Static assets
+├── docker-compose.yml    # Multi-container setup
+└── vite.config.js        # Vite configuration
+```
+
+---
+
+## Deployment
+
+The site is deployed on **Render** and auto-deploys on every push to the `main` branch.
