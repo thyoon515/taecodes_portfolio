@@ -32,3 +32,17 @@ body {
 a {
   text-decoration: none;
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 560ms cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,3 +1,4 @@
+import { useReveal } from "../hooks/useReveal";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -33,9 +34,12 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const ref = useReveal();
   return (
     <Box
+      ref={ref}
       id="experience"
+      className="reveal"
       sx={{
         py: { xs: 6, md: 8 },
       }}

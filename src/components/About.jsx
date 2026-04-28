@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Typography, Paper, Stack } from '@mui/material';
+import { useReveal } from '../hooks/useReveal';
 
 // About.jsx — MUI Version with continuous marquee animation
 // "Who's Tae?" section with short bio and a right-to-left moving tech stack carousel
 
 export default function About() {
+  const ref = useReveal();
   const techStacks = [
     { id: 'javascript', label: 'JavaScript', icon: '🟨' },
     { id: 'react', label: 'React', icon: '⚛️' },
@@ -26,7 +28,9 @@ export default function About() {
 
   return (
     <Box
+      ref={ref}
       id="about"
+      className="reveal"
       sx={{
         py: 10,
         backgroundColor: 'background.default',

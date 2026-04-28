@@ -1,3 +1,4 @@
+import { useReveal } from "../hooks/useReveal";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
@@ -45,9 +46,12 @@ const socials = [
 ];
 
 export default function Contact() {
+  const ref = useReveal();
   return (
     <Box
+      ref={ref}
       id="contact"
+      className="reveal"
       sx={{
         py: { xs: 8, md: 12 },
         textAlign: "center",

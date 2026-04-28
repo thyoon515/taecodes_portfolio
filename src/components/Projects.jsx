@@ -1,3 +1,4 @@
+import { useReveal } from "../hooks/useReveal";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -67,8 +68,9 @@ const projects = [
 ];
 
 export default function Projects() {
+  const ref = useReveal();
   return (
-    <Box id="projects" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box ref={ref} id="projects" className="reveal" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
         <Typography
           variant="h4"
