@@ -57,6 +57,14 @@ export default function Hero() {
             View Projects
           </a>
           <a
+            href="/Tae_Resume-Applied_AI_Engineer.pdf"
+            download
+            className="btn btn--outline"
+            style={{ color: outlineColor, border: outlineBorder }}
+          >
+            Download Resume
+          </a>
+          <a
             href="#contact"
             className="btn btn--outline"
             style={{ color: outlineColor, border: outlineBorder }}
