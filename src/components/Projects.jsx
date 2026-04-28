@@ -27,33 +27,41 @@ const projects = [
   {
     title: "taecodes Portfolio",
     description:
-      "This portfolio site — a full-stack application built with React + Vite on the frontend and Ruby on Rails as the API backend, containerized with Docker Compose and deployed via Kamal.",
+      "This portfolio site — a full-stack application built with React + Vite on the frontend and Ruby on Rails as the API backend, containerized with Docker Compose and deployed via Render.",
     tags: ["React", "Vite", "Ruby on Rails", "Docker", "MUI"],
     github: "https://github.com/thyoon515/taecodes_portfolio",
     live: "https://taecodes.com",
   },
   {
-    title: "LG.com Landing Pages",
+    title: "Build-A-Habit",
     description:
-      "Responsive marketing and promotional landing pages for LG.com, translating Figma designs into pixel-perfect HTML/CSS/Bootstrap implementations and managing assets in ContentStack CMS.",
-    tags: ["HTML", "Bootstrap", "Figma", "ContentStack", "JavaScript"],
-    github: null,
-    live: "https://lg.com",
-  },
-  {
-    title: "AI Workflow Automation",
-    description:
-      "Built AI-assisted workflows integrating ChatGPT and Zapier to automate email generation, content suggestions, and data entry — cutting repetitive operational overhead for a non-profit org.",
-    tags: ["Zapier", "ChatGPT", "Node.js", "Prompt Engineering"],
-    github: null,
+      "A full-stack habit tracking app where users create and manage scheduled tasks to build daily routines. Features user authentication, a calendar interface, and full CRUD with four interconnected models.",
+    tags: ["React", "Ruby on Rails", "PostgreSQL", "MUI", "FullCalendar", "BCrypt"],
+    github: "https://github.com/thyoon515/build-a-habit",
     live: null,
   },
   {
-    title: "RAG Pipeline Prototype",
+    title: "Easy Sell Easy Buy",
     description:
-      "Researching and prototyping Retrieval-Augmented Generation pipelines using LLM APIs and vector databases to surface relevant knowledge for a content-heavy web application.",
-    tags: ["RAG", "LLM APIs", "Vector Databases", "Python"],
-    github: null,
+      "A single-page NYC marketplace app where users can post, browse, and manage items for sale filtered by borough. Includes secure authentication, RESTful API, and location-based browsing.",
+    tags: ["React", "Ruby on Rails", "PostgreSQL", "MUI", "BCrypt", "React Router"],
+    github: "https://github.com/thyoon515/easy-sell-easy-buy",
+    live: null,
+  },
+  {
+    title: "Locate Zipcode",
+    description:
+      "A React SPA that lets authenticated users look up the city and state for any US zip code using the Zippopotam.us public API. Built with user auth and mock data persistence.",
+    tags: ["React", "JavaScript", "MUI", "REST API", "json-server"],
+    github: "https://github.com/thyoon515/phase-2-project",
+    live: null,
+  },
+  {
+    title: "Cocktail Recipe Finder",
+    description:
+      "A vanilla JS single-page app to discover cocktail recipes — search by name or hit 'Surprise Me!' for a random recipe, powered by TheCocktailDB public API.",
+    tags: ["JavaScript", "HTML", "CSS", "jQuery", "TheCocktailDB API"],
+    github: "https://github.com/thyoon515/phase-1-project",
     live: null,
   },
 ];
