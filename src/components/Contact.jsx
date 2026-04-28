@@ -95,10 +95,10 @@ export default function Contact() {
             borderRadius: 2,
             fontWeight: 700,
             fontSize: "0.95rem",
-            backgroundColor: "primary.main",
+            backgroundColor: "#7c3aed",
             color: "#fff",
-            transition: "opacity 0.2s, transform 0.2s",
-            "&:hover": { opacity: 0.85, transform: "translateY(-2px)" },
+            transition: "background-color 0.2s, transform 0.2s",
+            "&:hover": { backgroundColor: "#6d28d9", transform: "translateY(-2px)" },
           }}
         >
           Say Hello →
