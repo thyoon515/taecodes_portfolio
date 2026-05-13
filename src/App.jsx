@@ -18,9 +18,9 @@ function Home() {
   return (
     <>
       <Hero />
+      <WhatsNewBanner />
       <About />
       <Projects />
-      <WhatsNewBanner />
       <Experience />
       <Contact />
     </>
