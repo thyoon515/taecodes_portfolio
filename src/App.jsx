@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -9,6 +10,20 @@ import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import WhatsNew from "./components/WhatsNew";
+import WhatsNewPost from "./components/WhatsNewPost";
+
+function Home() {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Projects />
+      <Experience />
+      <Contact />
+    </>
+  );
+}
 
 export default function App() {
   const [mode, setMode] = useState("dark");
@@ -32,15 +47,18 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Appbar mode={mode} onToggleTheme={handleToggleTheme} />
-      <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
+      <BrowserRouter>
+        <Appbar mode={mode} onToggleTheme={handleToggleTheme} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/whats-new" element={<WhatsNew />} />
+            <Route path="/whats-new/:slug" element={<WhatsNewPost />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

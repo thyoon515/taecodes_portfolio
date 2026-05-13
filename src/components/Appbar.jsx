@@ -1,5 +1,6 @@
 // src/components/Appbar.jsx
 import * as React from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,29 +11,45 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import taecodesLogo from "/cd_taecodes_icon_2.png";
-import ThemeToggle from "./ThemeToggle"; // make sure this exists
+import ThemeToggle from "./ThemeToggle";
 
-const pages = ["Skills", "Projects", "Experience", "Contact"];
-const pageLinks = {
-  Skills: "#about",
-  Projects: "#projects",
-  Experience: "#experience",
-  Contact: "#contact",
-};
+// Each nav item can be a hash anchor on the home page OR a router path.
+// `type: "hash"` items scroll to a section (navigating home first if needed).
+// `type: "route"` items navigate to a real URL.
+const pages = [
+  { label: "Skills", type: "hash", target: "#about" },
+  { label: "Projects", type: "hash", target: "#projects" },
+  { label: "Experience", type: "hash", target: "#experience" },
+  { label: "What's New?", type: "route", target: "/whats-new" },
+  { label: "Contact", type: "hash", target: "#contact" },
+];
+
 export default function ResponsiveAppBar({
   mode = "dark",
   onToggleTheme = () => {},
 }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  // Hash links need to work from any route. If we're already on "/", just
+  // let the browser handle the anchor scroll. Otherwise navigate home with
+  // the hash and let the browser scroll to the target after mount.
+  const handleHashClick = (hash) => (event) => {
+    handleCloseNavMenu();
+    if (location.pathname !== "/") {
+      event.preventDefault();
+      navigate(`/${hash}`);
+      // Defer until Home mounts; then scroll.
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
   };
 
   return (
@@ -47,15 +64,17 @@ export default function ResponsiveAppBar({
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo */}
-          <a href="https://taecodes.com" target="_blank" rel="noreferrer">
-            <img src={taecodesLogo} alt="taecodes logo" style={{ height: "2em", width: "auto" }} />
-          </a>
+          {/* Logo — clicks return to home */}
+          <RouterLink to="/" style={{ display: "inline-flex" }}>
+            <img
+              src={taecodesLogo}
+              alt="taecodes logo"
+              style={{ height: "2em", width: "auto" }}
+            />
+          </RouterLink>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               ml: 1,
               mr: 2,
@@ -66,10 +85,10 @@ export default function ResponsiveAppBar({
               color: "inherit",
               textDecoration: "none",
             }}
-          ></Typography>
+          />
 
           {/* Mobile menu button */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, justifyContent: "flex-end" }}>
             <IconButton
               size="large"
               aria-label="open navigation menu"
@@ -83,67 +102,68 @@ export default function ResponsiveAppBar({
             <Menu
               id="menu-appbar-nav"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              transformOrigin={{ vertical: "top", horizontal: "right" }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => {
-                const href = pageLinks[page];
+                if (page.type === "route") {
+                  return (
+                    <MenuItem
+                      key={page.label}
+                      onClick={handleCloseNavMenu}
+                      component={RouterLink}
+                      to={page.target}
+                      sx={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography sx={{ textAlign: "center" }}>{page.label}</Typography>
+                    </MenuItem>
+                  );
+                }
+                // hash item — link to "/" + hash so it works from any route
                 return (
                   <MenuItem
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    component={href ? "a" : "li"}
-                    href={href}
-                    sx={href ? { textDecoration: "none", color: "inherit" } : undefined}
+                    key={page.label}
+                    component="a"
+                    href={`/${page.target}`}
+                    onClick={handleHashClick(page.target)}
+                    sx={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                    <Typography sx={{ textAlign: "center" }}>{page.label}</Typography>
                   </MenuItem>
                 );
               })}
             </Menu>
           </Box>
 
-          {/* Mobile monospace icon + title */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".05em",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          ></Typography>
-
           {/* Desktop nav links */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => {
-              const href = pageLinks[page];
+              if (page.type === "route") {
+                return (
+                  <Button
+                    key={page.label}
+                    component={RouterLink}
+                    to={page.target}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "text.primary", display: "block" }}
+                  >
+                    {page.label}
+                  </Button>
+                );
+              }
               return (
                 <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  component={href ? "a" : "button"}
-                  href={href}
+                  key={page.label}
+                  component="a"
+                  href={`/${page.target}`}
+                  onClick={handleHashClick(page.target)}
                   sx={{ my: 2, color: "text.primary", display: "block" }}
                 >
-                  {page}
+                  {page.label}
                 </Button>
               );
             })}
@@ -151,7 +171,6 @@ export default function ResponsiveAppBar({
 
           {/* Right side: theme toggle */}
           <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center", gap: 1 }}>
-            {/* Theme toggle receives mode and calls onToggleTheme */}
             <ThemeToggle mode={mode} onToggle={onToggleTheme} />
           </Box>
         </Toolbar>

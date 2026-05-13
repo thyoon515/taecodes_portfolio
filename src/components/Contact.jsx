@@ -86,6 +86,7 @@ export default function Contact() {
         </Typography>
 
         <Link
+          component="a"
           href="mailto:devtae10@gmail.com"
           underline="none"
           sx={{
@@ -103,6 +104,17 @@ export default function Contact() {
         >
           Say Hello →
         </Link>
+
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 2, fontSize: "0.85rem" }}>
+          Or copy directly:{" "}
+          <Link
+            component="a"
+            href="mailto:devtae10@gmail.com"
+            sx={{ color: "#a78bfa", "&:hover": { color: "#7c3aed" } }}
+          >
+            devtae10@gmail.com
+          </Link>
+        </Typography>
 
         <Divider sx={{ my: 6, borderColor: "divider" }} />
 
