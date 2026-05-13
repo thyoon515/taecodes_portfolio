@@ -12,6 +12,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatsNew from "./components/WhatsNew";
 import WhatsNewPost from "./components/WhatsNewPost";
+import WhatsNewBanner from "./components/WhatsNewBanner";
 
 function Home() {
   return (
@@ -19,6 +20,7 @@ function Home() {
       <Hero />
       <About />
       <Projects />
+      <WhatsNewBanner />
       <Experience />
       <Contact />
     </>

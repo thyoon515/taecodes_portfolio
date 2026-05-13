@@ -1,7 +1,7 @@
 ---
-title: "Weekly Builder Digest — May 12, 2026"
+title: "Cursor 3 Design Mode Cuts UI Iteration 20–40%"
 date: 2026-05-12
-summary: "Cursor 3 Design Mode cuts UI iteration 20–40%, Anthropic ships Managed Agents with Dreaming and Multi-agent Orchestration, AI agency pricing bands crystallize, and the indie operator playbook that fits taecodes."
+summary: "This week: Cursor 3's click-to-annotate Design Mode lands with real numbers, Anthropic ships Managed Agents with Dreaming and Multi-agent Orchestration, AI agency pricing bands crystallize, and the indie operator playbook that actually fits where taecodes is right now."
 tags: ["AI", "Dev Tools", "Agency", "Weekly Digest"]
 ---
 
