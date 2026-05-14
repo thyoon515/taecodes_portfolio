@@ -226,7 +226,7 @@ export default function WhatsNewBanner() {
             >
               <Box
                 component="img"
-                src="/whats-new-illustration.png"
+                src="/whats-new-illustration-v2.png"
                 alt="Developer at a laptop, back view with thick black glasses"
                 sx={{
                   width: "100%",
